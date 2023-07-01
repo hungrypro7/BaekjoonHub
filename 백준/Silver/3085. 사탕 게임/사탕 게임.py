@@ -1,7 +1,5 @@
 n = int(input())
-candy = []
-for i in range(n):
-    candy.append(list(input()))
+candy = [list(input()) for _ in range(n)]
 
 ans = []
 def inspect(N, list):
@@ -31,7 +29,6 @@ def inspect(N, list):
                 saved.append(p+1)
                 p = 0
         temp.append(max(saved))
-
     return max(temp)
 
 for i in range(n):          # 인접한 행 검사
