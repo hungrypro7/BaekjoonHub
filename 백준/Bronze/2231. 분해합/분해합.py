@@ -1,9 +1,7 @@
 n = int(input())
 def sum_num(n):
-    sum = 0
-    for i in str(n):
-        sum += int(i)
-    return sum
+    sum_num = sum(map(int, str(n)))
+    return sum_num
 
 for j in range(n):
     if j + sum_num(j) == n:
