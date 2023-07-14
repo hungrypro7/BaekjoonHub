@@ -1,27 +1,25 @@
 s = input()
 t = input()
-possible = False
-def DFS(n, arr):
-    global possible
-    if n == len(s):
-        if arr == s:
-            possible = True
+state = False
+def dfs(a, num):
+    global state
+    if num == len(s):
+        if s == a:
+            state = True
         return
+    if a[-1] == 'A':
+        a = a[:-1]
+        dfs(a, num-1)
+        a += 'A'
+    if a[0] == 'B':
+        a = a[1:]
+        a = a[::-1]
+        dfs(a, num-1)
+        a += 'B'
+        a = a[::-1]
 
-    if arr[-1] == 'A':
-        arr = arr[:-1]
-        DFS(n-1, arr)
-        arr += 'A'
-
-    if arr[0] == 'B':
-        arr = arr[::-1]
-        arr = arr[:-1]
-        DFS(n-1, arr)
-        arr += 'B'
-        arr = arr[::-1]
-
-DFS(len(t), t)
-if possible:
+dfs(t, len(t))
+if state:
     print(1)
 else:
     print(0)
