@@ -1,0 +1,23 @@
+pay = int(input())
+remain = 1000 - pay
+num = 0
+while remain != 0:
+    if remain >= 500:
+        remain -= 500
+        num += 1
+    elif remain >= 100:
+        remain -= 100
+        num += 1
+    elif remain >= 50:
+        remain -= 50
+        num += 1
+    elif remain >= 10:
+        remain -= 10
+        num += 1
+    elif remain >= 5:
+        remain -= 5
+        num += 1
+    elif remain >= 1:
+        remain -= 1
+        num += 1
+print(num)
