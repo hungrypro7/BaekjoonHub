@@ -1,4 +1,6 @@
+import sys
 import heapq
+input = sys.stdin.readline
 n = int(input())
 cards = []
 for i in range(n):
