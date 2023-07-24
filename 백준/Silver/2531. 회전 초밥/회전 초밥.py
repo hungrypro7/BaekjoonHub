@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n, d, k, c = map(int, input().split())      # 접시 수, 초밥 가짓수, 연속해서 먹는 접시 수, 쿠폰번호
 sushi = []
 for i in range(n):
