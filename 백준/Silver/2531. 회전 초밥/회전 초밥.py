@@ -5,18 +5,16 @@ sushi = []
 for i in range(n):
     num = int(input())
     sushi.append(num)
-sushi = sushi + sushi[:k-1]
+sushi = sushi + sushi[:k-1]     # 원형 큐 만들어줌
 p = 0
 sushi_set = set(sushi)
-ans = len(sushi_set)
-ans2 = 0
+ans_len = len(sushi_set)
+ans = []
 while p != n:
     once_pick = sushi[p:p+k]
-    if ans >= len(sushi_set) - len(set(once_pick)):
-        ans = len(sushi_set) - len(set(once_pick))
-        ans2 = len(once_pick)
-        ans3 = list(set(once_pick))
+    if ans_len >= len(sushi_set) - len(set(once_pick)):
+        ans_len = len(sushi_set) - len(set(once_pick))
+        ans = list(set(once_pick))
     p += 1
-
-ans3.append(c)
-print(len(set(ans3)))
+ans.append(c)
+print(len(set(ans)))
