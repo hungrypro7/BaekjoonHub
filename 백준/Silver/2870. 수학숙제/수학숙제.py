@@ -5,11 +5,11 @@ for i in range(n):
     j = 0
     temp = ''
     for j in range(len(con)):
-        if ord(con[j]) >= 48 and ord(con[j]) <= 57:
+        if 48 <= ord(con[j]) <= 57:
             temp += con[j]
             if j == len(con)-1:
                 ans.append(int(temp))
-        elif (ord(con[j]) >= 97 and ord(con[j]) <= 122):
+        elif 97 <= ord(con[j]) <= 122:
             if len(temp) >= 1:
                 ans.append(int(temp))
                 temp = ''
