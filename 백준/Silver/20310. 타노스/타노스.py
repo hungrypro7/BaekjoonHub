@@ -5,7 +5,5 @@ for i in s:
         zero += 1
     else:
         one += 1
-for _ in range(zero//2):
-    print(0, end='')
-for _ in range(one//2):
-    print(1, end='')
+print('0' * (zero//2), end='')
+print('1' * (one//2), end='')
