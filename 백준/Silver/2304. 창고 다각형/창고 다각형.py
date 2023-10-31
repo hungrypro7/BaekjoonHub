@@ -26,7 +26,7 @@ for i in range(n):
 cl2, ch2 = 0, 0
 for i in range(n-1, -1, -1):
     if building[i][1] > ch2:
-        ans += ch2 * abs(building[i][0]-cl2)
+        ans += ch2 * (cl2 - building[i][0])
         cl2 = building[i][0]
         ch2 = building[i][1]
     if building[i][1] == max_h:
