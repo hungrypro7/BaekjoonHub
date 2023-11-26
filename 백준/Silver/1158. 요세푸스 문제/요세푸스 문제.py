@@ -1,13 +1,8 @@
-from collections import deque
-N, K = map(int, input().split())
-queue = deque([i for i in range(1, N+1)])
-result = []
-while(len(queue) != 0):
-    for i in range(K-1):
-        queue.append(queue.popleft())
-    a = queue.popleft()
-    result.append(str(a))
-
-print("<", end='')
-print(', '.join(result), end='')
-print(">")
+n, k = map(int, input().split())
+yos = [i for i in range(1, n+1)]
+p = 0
+ans = []
+while yos:
+    p = (p + k - 1) % len(yos)
+    ans.append(str(yos.pop(p)))
+print('<', ', '.join(ans), '>', sep='')
