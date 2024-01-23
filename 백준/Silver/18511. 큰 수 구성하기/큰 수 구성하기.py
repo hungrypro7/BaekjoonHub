@@ -1,16 +1,18 @@
 import sys
+from itertools import product
 input = sys.stdin.readline
 n, k = map(int, input().split())
-k_ele = list(map(int, input().split()))
-ans = 0
-state = False
-for i in range(n, -1, -1):
-    for idx, j in enumerate(str(i)):
-        if int(j) not in k_ele:
-            break
-        elif idx == len(str(i))-1 and int(j) in k_ele:
-            ans = i
-            state = True
-    if state:
-        break
-print(ans)
+k_ele = list(map(str, input().split()))
+temp = len(str(n))
+while True:
+    tep = list(product(k_ele, repeat=temp))
+    ans = []
+    for i in tep:
+        if int("".join(i)) <= n:
+            ans.append(int("".join(i)))
+
+    if ans:
+        print(max(ans))
+        sys.exit(0)
+    else:
+        temp -= 1
