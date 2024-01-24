@@ -1,11 +1,13 @@
-s = int(input())
-count = 0
-num = 0
-for i in range(1, s):
-    if s - num < i or s == num:
-        break
-    num += i
-    count += 1
-if s == 1:
-    count = 1
-print(count)
+import sys
+input = sys.stdin.readline
+n = int(input())
+temp = 0
+if n <= 2:
+    print(1)
+elif n == 3:
+    print(2)
+for i in range(1, n):
+    temp += i
+    if temp > n:
+        print(i-1)
+        sys.exit(0)
