@@ -1,13 +1,12 @@
-N = int(input())
-p = []
-money = 0
-for i in range(N):
-    p.append(int(input()))
-p.sort()
-p.reverse()
-for j in range(N):
-    if p[j] - j < 0:
-        continue
-    money += p[j] - j
-
-print(money)
+import sys
+input = sys.stdin.readline
+n = int(input())    # 스타박스 앞에 서 있는 사람의 수
+tip = []
+for i in range(n):
+    tip.append(int(input()))
+tip.sort(reverse=True)
+ans = 0
+for i in range(n):
+    if tip[i] - i >= 0:
+        ans += tip[i] - i
+print(ans)
