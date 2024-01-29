@@ -1,14 +1,15 @@
-import sys
-input = sys.stdin.readline
-n = int(input())
-d = [0] * (n+1)
-d[1] = 0
-
-for i in range(2, n+1):
-    d[i] = d[i-1] + 1
-    if i % 2 == 0:
-        d[i] = min(d[i], d[i//2]+1)
-    if i % 3 == 0:
-        d[i] = min(d[i], d[i//3]+1)
-
-print(d[n])
+x = int(input())
+dp = [0, 0, 1, 1]
+if x <= 3:
+    print(dp[x])
+else:
+    for i in range(4, x+1):
+        if i % 6 == 0:
+            dp.append(min(dp[i//3]+1, dp[i//2]+1, dp[i-1]+1))
+        elif i % 3 == 0:
+            dp.append(min(dp[i//3]+1, dp[i-1]+1))
+        elif i % 2 == 0:
+            dp.append(min(dp[i//2]+1, dp[i-1]+1))
+        else:
+            dp.append(dp[i-1]+1)
+    print(dp[x])
