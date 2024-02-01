@@ -1,23 +1,14 @@
-N = int(input())
-dairy_product = []
-for i in range(N):
-    dairy_product.append(int(input()))
-money = 0
-dairy_product.sort()
-
-if N % 3 == 1:
-    money += dairy_product[0]
-    del dairy_product[0]
-    N -= 1
-elif N % 3 == 2:
-    money += sum(dairy_product[0:2])
-    del dairy_product[0:2]
-    N -= 2
-
-i = 0
-while(N != 0):
-    money += sum(dairy_product[i+1:i+3])
-    i += 3
-    N -= 3
-
-print(money)
+n = int(input())
+milk_and_yogurt = []
+for i in range(n):
+    milk_and_yogurt.append(int(input()))
+milk_and_yogurt.sort()
+count = 0
+ans = 0
+for i in range(n-1, -1, -1):
+    count += 1
+    ans += milk_and_yogurt[i]
+    if count == 3:
+        count = 0
+        ans -= milk_and_yogurt[i]
+print(ans)
