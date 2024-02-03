@@ -1,38 +1,46 @@
 import sys
+sys.setrecursionlimit(10**6)
 from collections import deque
-input = sys.stdin.readline
-n, m = map(int, input().split())
-maps = []
+n, m = map(int, input().split())    # 세로, 가로
+matrix = []
 for i in range(n):
-    temp = list(map(int, input().split()))
-    maps.append(temp)
-    if 2 in temp:
-        x = i   # 목표지점 x, y
-        y = temp.index(2)
-visited = [[-1] * m for j in range(n)]
-nx = [-1, 1, 0, 0]
-ny = [0, 0, -1, 1]
-def BFS(x1, y1):
+    matrix.append(list(map(int, input().split())))
+
+def bfs(x, y):
     queue = deque()
-    queue.append((x1, y1))
-    visited[x1][y1] = 0     # 목표 지점 방문 기록
+    queue.append((x, y))
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
     while queue:
+        x1, y1 = queue.popleft()
+        for k in range(4):
+            nx = x1 + dx[k]
+            ny = y1 + dy[k]
+            if 0 <= nx < n and 0 <= ny < m and matrix[nx][ny] == 1:
+                matrix[nx][ny] = matrix[x1][y1] + 1
+                queue.append((nx, ny))
 
-        (ax1, ay1) = queue.popleft()
+    for p in range(n):
+        for q in range(m):
+            if matrix[p][q] == 1:
+                matrix[p][q] = -1
 
-        for i in range(4):
-            a, b = ax1+nx[i], ay1+ny[i]
-            if 0 <= a < n and 0 <= b < m and visited[a][b] == -1:
-                if maps[a][b] == 1:
-                    queue.append((a, b))
-                    visited[a][b] = visited[ax1][ay1] + maps[a][b]
-                elif maps[a][b] == 0:
-                    visited[a][b] = 0
-BFS(x, y)
+    for l in range(4):
+        nx = x + dx[l]
+        ny = y + dy[l]
+        if 0 <= nx < n and 0 <= ny < m and matrix[nx][ny] != 0:
+            matrix[nx][ny] = 1
+
+state = False
 for i in range(n):
     for j in range(m):
-        if visited[i][j] == -1 and maps[i][j] == 0:
-            print(0, end=' ')
-        else:
-            print(visited[i][j], end=' ')
-    print()
+        if matrix[i][j] == 2:
+            matrix[i][j] = 0
+            bfs(i, j)
+            state = True
+            break
+    if state:
+        break
+
+for i in matrix:
+    print(*i)
