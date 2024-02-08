@@ -1,11 +1,8 @@
-mod = 10007
+import sys
+input = sys.stdin.readline
 n = int(input())
-d = [0] * 1001
-d[1] = 1
-d[2] = 2
-
-for i in range(3, n+1):
-    d[i] = (d[i-1] + d[i-2]) % mod
-
-print(d[n])
-
+dp = [0, 1, 2]
+if n > 2:
+    for i in range(n-2):
+        dp.append(dp[-1]+dp[-2])
+print(dp[n] % 10007)
