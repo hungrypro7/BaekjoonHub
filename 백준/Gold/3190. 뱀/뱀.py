@@ -17,29 +17,16 @@ for i in range(l):
 
 r, c = 0, 0     # 뱀의 위치
 time = 0    # 시간
-pos = 3     # 뱀이 바라보는 방향
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+pos = 0     # 뱀이 바라보는 방향
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1, 0]
 length = 1      # 뱀의 길이
 while True:
     if time in snake_move:
-        state = True
-        if pos == 0 and snake_move[time] == 'D':
-            pos = 3
-        elif pos == 0 and snake_move[time] == 'L':
-            pos = 2
-        elif pos == 1 and snake_move[time] == 'D':
-            pos = 2
-        elif pos == 1 and snake_move[time] == 'L':
-            pos = 3
-        elif pos == 2 and snake_move[time] == 'D':
-            pos = 0
-        elif pos == 2 and snake_move[time] == 'L':
-            pos = 1
-        elif pos == 3 and snake_move[time] == 'D':
-            pos = 1
-        elif pos == 3 and snake_move[time] == 'L':
-            pos = 0
+        if snake_move[time] == 'L':
+            pos = (pos - 1) % 4
+        else:
+            pos = (pos + 1) % 4
 
     if r < 0 or r >= n or c < 0 or c >= n:      # 모서리 벗어나면 종료
         print(time)
