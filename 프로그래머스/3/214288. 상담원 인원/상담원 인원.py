@@ -1,8 +1,5 @@
 from itertools import combinations_with_replacement, permutations
 from heapq import heappush, heappop
-k = 3
-n = 5
-reqs = [[10, 60, 1], [15, 100, 3], [20, 30, 1], [30, 50, 3], [50, 40, 1], [60, 30, 2], [65, 30, 1], [70, 100, 2]]
 
 def waiting_time(li, num):    # 상담 유형별 시작-종료 시간 리스트, 상담원 숫자
     total_time = 0
@@ -42,5 +39,3 @@ def solution(k, n, reqs):    # k는 상담 유형 수, n은 멘토의 수, reqs�
             temp += waiting_time(waiting[j], con[j])
         answer = min(answer, temp)
     return answer
-
-solution(k, n, reqs)
