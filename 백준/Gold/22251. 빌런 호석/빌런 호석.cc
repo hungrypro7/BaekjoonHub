@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <vector>
-#include <cmath>
 
 using namespace std;
 
-// LED 숫자별로 불이 켜지는 패턴을 정의한 배열
 vector<vector<int>> led = {
     {1, 1, 1, 0, 1, 1, 1}, // 0
     {0, 0, 1, 0, 0, 1, 0}, // 1
@@ -19,8 +18,8 @@ vector<vector<int>> led = {
     {1, 1, 1, 1, 0, 1, 1}  // 9
 };
 
-// 두 숫자의 LED 패턴 차이를 비교하는 함수
 int compare(int a, int b) {
+    
     int count = 0;
     string str1 = to_string(a);
     string str2 = to_string(b);
@@ -28,7 +27,6 @@ int compare(int a, int b) {
     int len1 = (int)str1.length();
     int len2 = (int)str2.length();
     
-    // 두 문자열의 길이가 동일한 경우
     if (len1 == len2) {
         for (int j = len1 - 1; j >= 0; --j) {
             int temp1 = str1[j] - '0';
@@ -66,27 +64,22 @@ int compare(int a, int b) {
             }
         }
     }
-
     return count;
 }
 
 int main() {
-    // 입력: 층, 디스플레이 자리 수, 반전시킬 최대 개수, 현재 층
+    
     int n, k, p, x;
     cin >> n >> k >> p >> x;
-
+    
     int ans = 0;
-
-    // 각 층을 비교하여 조건에 맞는지 확인
-    for (int i = 1; i <= n; ++i) {
-        if (i != x && compare(i, x) <= p) {
+    
+    for(int i=1; i<n+1; i++) {
+        if (i != x && compare(i, x) <= p)
             ans++;
-        }
     }
-
-    // 결과 출력
+    
     cout << ans << endl;
-
+    
     return 0;
 }
-
