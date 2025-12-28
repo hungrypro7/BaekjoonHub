@@ -1,23 +1,12 @@
 n = int(input())
+INF = 10**9
+dp = [INF] * (n + 1)
+dp[0] = 0
 
-cnt = 0
-while n > 0:
-    # 1. n이 5로 나눠질 경우
-    if n % 5 == 0:
-        cnt += n // 5
-        break
+for i in range(1, n + 1):
+    if i >= 3:
+        dp[i] = min(dp[i], dp[i - 3] + 1)
+    if i >= 5:
+        dp[i] = min(dp[i], dp[i - 5] + 1)
 
-    # 2. n이 3으로 나눠질 경우
-    n -= 3
-
-    # 3. n이 5와 3의 조합으로 나눠 담을 수 있는 경우
-    if n == 1 or n == 2:
-        cnt = -1
-        break
-
-    # 4. 5와 3으로 나눠지지 않는 경우
-
-
-    cnt += 1
-
-print(cnt)
+print(dp[n] if dp[n] != INF else -1)
