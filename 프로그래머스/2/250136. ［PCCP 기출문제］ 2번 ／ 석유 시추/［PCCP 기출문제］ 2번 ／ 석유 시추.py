@@ -1,41 +1,43 @@
 from collections import deque
 
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+def bfs(x, y, land):
+    queue = deque([(x, y)])
+    visited[x][y] = 1
+
+    amount = 1
+    cols = set([y])
+
+    while queue:
+        ix, iy = queue.popleft()
+
+        for k in range(4):
+            nx = ix + dx[k]
+            ny = iy + dy[k]
+
+            if 0 <= nx < n and 0 <= ny < m:
+                if not visited[nx][ny] and land[nx][ny] == 1:
+                    visited[nx][ny] = 1
+                    queue.append((nx, ny))
+                    amount += 1
+                    cols.add(ny)
+
+    return amount, cols
+
 def solution(land):
+    global n, m, visited
     n, m = len(land), len(land[0])
-    visited = [[False] * m for _ in range(n)]
-    col_oil = [0] * m
 
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
-
-    def bfs(x, y):
-        queue = deque([(x, y)])
-        visited[x][y] = True
-
-        size = 1
-        cols = set([y])   # 이 덩어리가 포함하는 열들
-
-        while queue:
-            cx, cy = queue.popleft()
-
-            for k in range(4):
-                nx = cx + dx[k]
-                ny = cy + dy[k]
-
-                if 0 <= nx < n and 0 <= ny < m:
-                    if not visited[nx][ny] and land[nx][ny] == 1:
-                        visited[nx][ny] = True
-                        queue.append((nx, ny))
-                        size += 1
-                        cols.add(ny)
-
-        return size, cols
+    visited = [[0] * m for _ in range(n)]
+    oil_by_col = [0] * m
 
     for i in range(n):
         for j in range(m):
             if land[i][j] == 1 and not visited[i][j]:
-                size, cols = bfs(i, j)
+                amount, cols = bfs(i, j, land)
                 for col in cols:
-                    col_oil[col] += size
+                    oil_by_col[col] += amount
 
-    return max(col_oil)
+    return max(oil_by_col)
